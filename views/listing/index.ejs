@@ -1,0 +1,18 @@
+
+<% layout("/layouts/boilerplate") -%>
+<body >
+  <div style="padding:0px 105px;">
+  <h3>All Listing</h3>
+  <form method="get" action="/create">
+    <button>add your place</button>
+  </form>
+  <div style="display: flex; text-decoration: none; text-align: center; gap:20px; flex-wrap:wrap;">
+   <% for(listing of alllistings){ %>
+    <a  href="/listing/<%=listing._id %>" style="text-decoration: none; color: black; font-size: large;" >
+    <p><%= listing.title %></p>
+ <img src='<%= listing.image.url %>' alt="none" loading="lazy" width="300px" height="300px" style="border-radius: 12px; padding:0px 3px" >
+  <%  } %>
+  </a>
+ </div>
+ </div>
+</body>

@@ -1,0 +1,20 @@
+
+<% layout("/layouts/boilerplate") -%>
+<body>
+    <h3>edit your place</h3>
+    <form method="post" action="/edit/<%= list._id %>?_method=put">
+    <input type="text" name="list[title]" value="<%= list.title %>" placeholder="place name"><br/>
+    <br/>
+    <textarea type="text" cols="55" rows="6" name="list[description]" placeholder="description "><%= list.description %></textarea><br/>
+    <br/>
+    <textarea type="text" cols="55" rows="6" name="list[image.url]"  placeholder="image url "><%= list.image.url %></textarea><br/>
+    <br />
+    <input type="number" value="<%= list.price %>" name="list[price]" placeholder="price"><br/>
+    <br/>
+    <input type="text" value="<%= list.location %>" name="list[location]" placeholder="location"><br/>
+    <br/>
+    <input type="text" value="<%= list.country %>" name="list[country]" placeholder="country name"><br/>
+    <br/>
+    <button>edit place</button>
+    </form>
+</body>

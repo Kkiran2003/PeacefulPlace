@@ -1,0 +1,49 @@
+.navbar {
+  height: 4rem;
+}
+
+.fa-compass {
+  color: #fa434b;
+  font-size: 2rem;
+}
+
+.nav-link {
+  color: #222222 !important;
+}
+
+footer {
+  background: #ebebeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.f-social,
+.f-info,
+.f-links {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+}
+.f-social {
+    font-size: 1.5rem;
+    gap: 1rem;
+}
+
+.f-links {
+    gap: 1rem;
+}
+
+.f-links a {
+     text-decoration: none;
+     color: #222222;
+}
+
+.f-links a:hover{
+     text-decoration: underline;
+     color: black;
+}
