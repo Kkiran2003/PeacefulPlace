@@ -1,18 +1,32 @@
 
 <% layout("/layouts/boilerplate") -%>
 <body >
-  <div style="padding:0px 105px;">
-  <h3>All Listing</h3>
+  <div>
+    <div class="page-header">
+       <h3>Popular Places in world</h3>
   <form method="get" action="/create">
-    <button>add your place</button>
+    <button class="add-btn">Add Your Place</button>
   </form>
-  <div style="display: flex; text-decoration: none; text-align: center; gap:20px; flex-wrap:wrap;">
+    </div>
+ 
+  <div class="all-cards">
    <% for(listing of alllistings){ %>
-    <a  href="/listing/<%=listing._id %>" style="text-decoration: none; color: black; font-size: large;" >
-    <p><%= listing.title %></p>
- <img src='<%= listing.image.url %>' alt="none" loading="lazy" width="300px" height="300px" style="border-radius: 12px; padding:0px 3px" >
+    <div class="card">
+      <a  href="/listing/<%=listing._id %>" class="card-links" >
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>">
+           <div class="card-img-overlay">
+  </div>
+          <div class="card-body">
+            <h6 class="card-text"><b><%= listing.title %></b></h6>
+             <p>&#8377;<%= listing.price %>/Night</p>
+          </div>
+       </a>    
+    </div>
   <%  } %>
-  </a>
+ 
+ </div>
  </div>
  </div>
 </body>
+ 
+  
