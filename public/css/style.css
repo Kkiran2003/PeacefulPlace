@@ -3,6 +3,13 @@ body{
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container{
+  flex: 1;
 }
 
 
@@ -103,5 +110,18 @@ footer {
   opacity: 0.2;
 }
 
+.btn{
+   border-radius: 8px !important;
+  padding:2px 8px ;
+  background:#fa434b !important;
+  color: white !important;
+  border: none;
+  transition: transform 0.2s ease 0.1s !important;
+}
+
+.btn:hover{
+box-shadow: 1px 1px 8px black;
+transform: scale(1.1);
+}
 
 

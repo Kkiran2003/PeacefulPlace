@@ -1,21 +1,41 @@
 
 <% layout("/layouts/boilerplate") -%>
 <body>
-    <h3>add your place</h3>
+    <div class="flex col-10 col-md-8 offset-2 ">
+        <h3>Add your place</h3>
     <form method="post" action="/new">
-    <input type="text" name="list[title]" placeholder="place name"><br/>
-    <br/>
-    <textarea type="text" cols="55" rows="6" name="list[description]" placeholder="description "></textarea><br/>
-    <br/>
+     <div class="mb-3">
+            <label for="title" class="form-label">add catchy title</label>
+            <input type="text" name="list[title]" placeholder="Villaa.." id="title" class="form-control">
+      </div> 
+     
+      <div class="mb-3">
+         <label for="description" class="form-label">Description</label>
+          <textarea type="text" cols="55" id="description" rows="6" name="list[description]" placeholder="description" class="form-control"></textarea>
+      </div>
 
-    <input type="text" name="list[image.url]" placeholder="image url"><br/>
-    <br />
-    <input type="number" name="list[price]" placeholder="price"><br/>
-    <br/>
-    <input type="text" name="list[location]" placeholder="location"><br/>
-    <br/>
-    <input type="text" name="list[country]" placeholder="country name"><br/>
-    <br/>
-    <button>Add place</button>
+      <div class="mb-3">
+        <label for="image" class="form-label">image</label>
+        <input type="text" name="list[image.url]" placeholder="Enter image url/image Url" id="image" class="form-control">
+     </div>
+      
+     <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="Price" class="form-label col-2">Price</label>
+        <input type="number" name="list[price]" id="Price" placeholder="1200" class="form-control">
+      </div>
+      
+      <div class="col-md-8 mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" name="list[location]" id="location" placeholder="Panvel" class="form-control" >
+      </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" name="list[country]" id="country" placeholder="India" class="form-control" >
+      </div>
+    <button class="btn">Add place</button>
     </form>
+    </div>
 </body>
