@@ -7,6 +7,8 @@ const port = 8080;
 const Mongo_DB = 'mongodb://127.0.0.1:27017/wonderlust'
 const listing = require("./model/listing.js");
 const ejsMate = require("ejs-mate")
+const wrapAsync = require("./utils/wrapAsync.js")
+const ExpressError = require("./ExpressError.js")
 
 
 main().then(() => {
@@ -33,49 +35,59 @@ res.redirect("/listing")
 })
 
 //index route
-app.get("/listing", async (req, res) => {
+app.get("/listing", wrapAsync(async (req, res,next) => {
     let alllistings = await listing.find();
     res.render("./listing/index.ejs", { alllistings });
-})
+}));
+
 //show route
-app.get("/listing/:id", async (req, res) => {
+app.get("/listing/:id", wrapAsync(async (req, res,next) => {
     let { id } = req.params;
     let list = await listing.findById(id)
     res.render("./listing/show.ejs", { list })
-})
+}))
 
 app.get("/create", (req, res) => {
     res.render("./listing/new.ejs")
 })
 
 //create route
-app.post("/new", async (req, res) => {
+app.post("/new", wrapAsync(async (req, res ,next) => {
     let newlisting = new listing(req.body.list);
     await newlisting.save()
 
     res.redirect("/listing")
-})
+}))
 
 //edit form
-app.get("/listing/:id/edit", async (req, res) => {
+app.get("/listing/:id/edit", wrapAsync(async (req, res ,next) => {
     let { id } = req.params;
 
     let list = await listing.findById(id);
     res.render("./listing/edit.ejs", { list })
-})
+}))
 
-app.put("/edit/:id", async (req, res) => {
+app.put("/edit/:id", wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.list });
     res.redirect(`/listing/${id}`);
-})
+}))
 
-app.delete("/delete/:id", async (req, res) => {
+app.delete("/delete/:id", wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     let deleteRecord = await listing.findByIdAndDelete(id);
     console.log(deleteRecord);
     
     res.redirect(`/listing`);
+}))
+
+app.all("*splat",(req,res,next)=>{
+    next ( new ExpressError(404,"page not found!"))
+})
+
+app.use((err,req,res,next)=>{
+   let { status,message}=err;
+   res.status(status).send(message);
 })
 
 app.listen(port, () => {
