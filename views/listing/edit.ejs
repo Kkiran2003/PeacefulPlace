@@ -1,20 +1,97 @@
-
 <% layout("/layouts/boilerplate") -%>
 <body>
-    <h3>edit your place</h3>
-    <form method="post" action="/edit/<%= list._id %>?_method=put">
-    <input type="text" name="list[title]" value="<%= list.title %>" placeholder="place name"><br/>
-    <br/>
-    <textarea type="text" cols="55" rows="6" name="list[description]" placeholder="description "><%= list.description %></textarea><br/>
-    <br/>
-    <textarea type="text" cols="55" rows="6" name="list[image.url]"  placeholder="image url "><%= list.image.url %></textarea><br/>
-    <br />
-    <input type="number" value="<%= list.price %>" name="list[price]" placeholder="price"><br/>
-    <br/>
-    <input type="text" value="<%= list.location %>" name="list[location]" placeholder="location"><br/>
-    <br/>
-    <input type="text" value="<%= list.country %>" name="list[country]" placeholder="country name"><br/>
-    <br/>
-    <button>edit place</button>
-    </form>
+    <div class="flex offset-2 col-10 mx-auto">
+  <h3 class="text-center">Edit Place</h3>
+  <form method="post" action="/edit/<%= list._id %>?_method=put" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="title" class="form-label">Edit Title</label>
+      <input
+        type="text"
+        name="list[title]"
+        value="<%= list.title %>"
+        placeholder="place name"
+        class="form-control"
+        required
+      />
+      <div class="invalid-feedback">Please provide a valid Title.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Edit Description</label>
+      <textarea
+        type="text"
+        cols="55"
+        rows="6"
+        name="list[description]"
+        placeholder="description "
+        class="form-control"
+         required
+      >
+
+<%= list.description %></textarea
+      >
+      <div class="invalid-feedback">Please provide a valid Description.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Add new image</label>
+      <textarea
+        type="text"
+        cols="55"
+        rows="6"
+        name="list[image][url]"
+        placeholder="Edit image url"
+        class="form-control"
+         required
+      >
+<%= list.image.url %></textarea
+      >
+       <div class="invalid-feedback">Please provide a image url.</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="Price" class="form-label">Add new Price</label>
+        <input
+          type="number"
+          value="<%= list.price %>"
+          name="list[price]"
+          placeholder="price"
+          class="form-control"
+           required
+        />
+         <div class="invalid-feedback">Please provide a Price.</div>
+      </div>
+
+      <div class="col-md-8 mb-3">
+        <label for="location" class="form-label">Edit Location</label>
+        <input
+          type="text"
+          value="<%= list.location %>"
+          name="list[location]"
+          placeholder="location"
+          class="form-control"
+           required
+        />
+         <div class="invalid-feedback">Please provide a valid location.</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="country" class="form-label">Add new Country</label>
+      <input
+        type="text"
+        value="<%= list.country %>"
+        name="list[country]"
+        placeholder="country name"
+        class="form-control"
+        required
+      />
+      <div class="invalid-feedback">Please provide a valid country.</div>
+    </div>
+    <button class="edit-btn">edit place</button>
+  </form>
+  </div>
+  <script src="/js/validation.js"></script>
 </body>
+

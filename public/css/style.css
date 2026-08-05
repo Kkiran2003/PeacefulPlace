@@ -124,4 +124,35 @@ box-shadow: 1px 1px 8px black;
 transform: scale(1.1);
 }
 
+/* edit page */
+.edit-btn{
+    display: inline-flex;
+    /* align-items: center; */
+    justify-content: center;
+
+    padding: 12px 8px;
+    line-height: 1;
+    font-size: 1rem;
+
+    background: #fa434b;
+    color: white;
+    text-decoration: none;
+
+    border-radius: 8px;
+}
+
+.edit-btnn{
+  text-decoration: none !important;
+}
+
+.delete-btn{
+  border-radius: 8px !important;
+  padding:2px 8px ;
+  background:#000 !important;
+  color: white !important;
+  border: none;
+  transition: transform 0.2s ease 0.1s !important;
+
+}
+
 

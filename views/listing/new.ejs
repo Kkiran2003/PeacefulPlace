@@ -1,41 +1,90 @@
-
 <% layout("/layouts/boilerplate") -%>
 <body>
-    <div class="flex col-10 col-md-8 offset-2 ">
-        <h3>Add your place</h3>
-    <form method="post" action="/new">
-     <div class="mb-3">
-            <label for="title" class="form-label">add catchy title</label>
-            <input type="text" name="list[title]" placeholder="Villaa.." id="title" class="form-control">
-      </div> 
-     
+  <div class="flex col-10 col-md-8 offset-2">
+    <h3 class="text-center">Add your place</h3>
+    <form method="post" action="/new" class="needs-validation" novalidate>
       <div class="mb-3">
-         <label for="description" class="form-label">Description</label>
-          <textarea type="text" cols="55" id="description" rows="6" name="list[description]" placeholder="description" class="form-control"></textarea>
+        <label for="title" class="form-label">add catchy title</label>
+        <input
+          type="text"
+          name="list[title]"
+          placeholder="Villaa.."
+          id="title"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Please provide a valid Title.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          type="text"
+          cols="55"
+          id="description"
+          rows="6"
+          name="list[description]"
+          placeholder="description"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please provide a valid Description.</div>
       </div>
 
       <div class="mb-3">
         <label for="image" class="form-label">image</label>
-        <input type="text" name="list[image.url]" placeholder="Enter image url/image Url" id="image" class="form-control">
-     </div>
-      
-     <div class="row">
-      <div class="col-md-4 mb-3">
-        <label for="Price" class="form-label col-2">Price</label>
-        <input type="number" name="list[price]" id="Price" placeholder="1200" class="form-control">
+        <input
+          type="text"
+          name="list[image][url]"
+          placeholder="Enter image url/image Url"
+          id="image"
+          class="form-control"
+        />
+        <div class="valid-feedback">looks good</div>
       </div>
-      
-      <div class="col-md-8 mb-3">
-        <label for="location" class="form-label">Location</label>
-        <input type="text" name="list[location]" id="location" placeholder="Panvel" class="form-control" >
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="Price" class="form-label">Price</label>
+          <input
+            type="text"
+            name="list[price]"
+            id="Price"
+            placeholder="1200"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please provide a Price.</div>
+        </div>
+
+        <div class="col-md-8 mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            name="list[location]"
+            id="location"
+            placeholder="Panvel"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Please provide a valid location.</div>
+        </div>
       </div>
-      </div>
-      
+
       <div class="mb-3">
-        <label for="country" class="form-label">Country</label>
-        <input type="text" name="list[country]" id="country" placeholder="India" class="form-control" >
+        <label for="country" class="form-label" required>Country</label>
+        <input
+          type="text"
+          name="list[country]"
+          id="country"
+          placeholder="India"
+          class="form-control"
+          required
+        />
+        <div class="invalid-feedback">Please provide a valid country.</div>
       </div>
-    <button class="btn">Add place</button>
+      <button class="btn">Add place</button>
     </form>
-    </div>
+  </div>
+  <script src="/js/validation.js"></script>
 </body>

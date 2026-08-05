@@ -1,22 +1,32 @@
-
 <% layout("/layouts/boilerplate") -%>
 <body>
-    <div style="display: flex; justify-content: end;">
-    <form method="get" action="/listing">
-        <button style="padding: 3px 12px; text-align: right; margin: auto; color: aliceblue; background: #000; border-radius: 12px; cursor: pointer;">got to the listing</button>
-    </form>
+  <div class="flex col-8 offset-2">
+    <div class="card">
+        
+      <img
+        src="<%= list.image.url %>"
+        alt="none"
+        loading="lazy"
+        width="50%"
+        height="100%"
+        style="border-radius: 12px"
+      />
+      
+      <h4><%= list?.title %></h4>
+      <p><%= list?.description %></p>
+      <p>Price : &#8377;<%= list?.price.toLocaleString("en-In") %></p>
+      <p>location : <%= list.location %></p>
+      <p>country : <%= list.country %></p>
     </div>
-    <div style="text-align: center;">
-    <h3><%= list?.title %></h3>
-    <img src='<%= list.image.url %>' alt="none" loading="lazy" width="300px" height="300px" style="border-radius: 12px;">
-    <p><%= list?.description %></p>
-    <p>Price : &#8377;<%= list?.price.toLocaleString("en-In") %></p>
-    <p>location : <%= list.location %></p>
-    <p>country : <%= list.country %></p>
 
-    <a href="/listing/<%=list?._id %>/edit"> edit place</a> 
-    <form method="post" action="/delete/<%= list?._id %>?_method=delete">
-        <button>delete the record</button>
+   <div class="d-flex gap-2">
+    <a href="/listing/<%= list._id %>/edit" class="edit-btn edit-btnn">Edit</a>
+
+    <form method="post" action="/delete/<%= list._id %>?_method=delete">
+        <button class="btn btn-danger">Delete</button>
     </form>
 </div>
+      
+    
+  </div>
 </body>
