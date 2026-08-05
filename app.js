@@ -9,6 +9,18 @@ const listing = require("./model/listing.js");
 const ejsMate = require("ejs-mate")
 const wrapAsync = require("./utils/wrapAsync.js")
 const ExpressError = require("./ExpressError.js")
+const {listingSchema} = require("./schema.js")
+
+
+const validatelisting = (req,res,next)=>{
+    console.log("running...")
+    let {error} = listingSchema.validate(req.body);
+    if(error){
+        const errmsg = error.details.map((e1) => e1.message).join(",");
+       next(new ExpressError(400,errmsg));
+    }
+    next()
+}
 
 
 main().then(() => {
@@ -52,7 +64,7 @@ app.get("/create", (req, res) => {
 })
 
 //create route
-app.post("/new", wrapAsync(async (req, res ,next) => {
+app.post("/new", validatelisting, wrapAsync(async (req, res ,next) => {
     let newlisting = new listing(req.body.list);
     await newlisting.save()
 
@@ -67,7 +79,7 @@ app.get("/listing/:id/edit", wrapAsync(async (req, res ,next) => {
     res.render("./listing/edit.ejs", { list })
 }))
 
-app.put("/edit/:id", wrapAsync(async (req, res, next) => {
+app.put("/edit/:id", validatelisting , wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.list });
     res.redirect(`/listing/${id}`);
@@ -87,7 +99,7 @@ app.all("*splat",(req,res,next)=>{
 
 app.use((err,req,res,next)=>{
    let { status,message}=err;
-   res.status(status).send(message);
+   res.render("./layouts/error.ejs", {message});
 })
 
 app.listen(port, () => {
