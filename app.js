@@ -9,7 +9,8 @@ const listing = require("./model/listing.js");
 const ejsMate = require("ejs-mate")
 const wrapAsync = require("./utils/wrapAsync.js")
 const ExpressError = require("./ExpressError.js")
-const {listingSchema} = require("./schema.js")
+const {listingSchema , reviewSchema} = require("./schema.js")
+const review = require("./model/review.js")
 
 
 const validatelisting = (req,res,next)=>{
@@ -17,11 +18,19 @@ const validatelisting = (req,res,next)=>{
     let {error} = listingSchema.validate(req.body);
     if(error){
         const errmsg = error.details.map((e1) => e1.message).join(",");
-       next(new ExpressError(400,errmsg));
+      return next(new ExpressError(400,errmsg));
     }
-    next()
+   next();
 }
 
+const validatereview = (req,res,next)=>{
+    let {error} = reviewSchema.validate(req.body);
+    if(error){
+        const errmsg = error.details.map((e1) => e1.message).join(",");
+      return next(new ExpressError(400,errmsg));
+    }
+   next(); 
+}
 
 main().then(() => {
     console.log("connetion successfully")
@@ -55,7 +64,7 @@ app.get("/listing", wrapAsync(async (req, res,next) => {
 //show route
 app.get("/listing/:id", wrapAsync(async (req, res,next) => {
     let { id } = req.params;
-    let list = await listing.findById(id)
+    let list = await listing.findById(id).populate("reviews")
     res.render("./listing/show.ejs", { list })
 }))
 
@@ -92,6 +101,30 @@ app.delete("/delete/:id", wrapAsync(async (req, res, next) => {
     
     res.redirect(`/listing`);
 }))
+
+app.post("/listings/:id/review",validatereview, wrapAsync(async(req,res,next)=>{
+    let list = await listing.findById(req.params.id);
+    let newReview = new review(req.body.review);
+    list.reviews.push(newReview);
+
+     await newReview.save();
+     await list.save();
+     console.log("reviews succesfully added")
+     res.redirect(`/listing/${list._id}`)
+}))
+
+app.delete("/listings/:id/reviews/:reviewid",wrapAsync(async(req,res,next)=>{
+    let {id , reviewid} = req.params;
+    console.log("running")
+
+    
+   let list = await listing.findByIdAndUpdate(id, {$pull : {reviews:reviewid}});
+   console.log(list);
+
+   await review.findByIdAndDelete(reviewid)
+    res.redirect(`/listing/${id}`);
+    
+}));
 
 app.all("*splat",(req,res,next)=>{
     next ( new ExpressError(404,"page not found!"))

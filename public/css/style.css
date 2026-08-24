@@ -78,7 +78,7 @@ footer {
 }
 
 /* card */
-.card{
+.list-card{
   margin: 6px;
   border: none !important;
 }
@@ -117,6 +117,10 @@ footer {
   color: white !important;
   border: none;
   transition: transform 0.2s ease 0.1s !important;
+}
+
+.btnn{
+   border-radius: 8px !important;
 }
 
 .btn:hover{
