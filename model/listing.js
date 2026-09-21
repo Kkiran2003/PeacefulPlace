@@ -16,8 +16,8 @@ const listingSchema = new schema({
         },
         url: {
             type: String,
-            default: "https://images.unsplash.com/photo-1781633793478-7e8ad6705d51?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            set: (v) => v === "" ? "https://images.unsplash.com/photo-1781633793478-7e8ad6705d51?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v,
+            default: "https://a0.muscache.com/im/pictures/hosting/Hosting-1748984296110710437/original/cfa7f64e-8148-4edf-8b45-6b1e3099d550.jpeg?im_w=320",
+            set: (v) => v === "" ? "https://a0.muscache.com/im/pictures/hosting/Hosting-1748984296110710437/original/cfa7f64e-8148-4edf-8b45-6b1e3099d550.jpeg?im_w=320" : v,
         },
     },
     reviews:[{
@@ -25,6 +25,10 @@ const listingSchema = new schema({
         ref:'Review'
 
     }],
+    owener:{
+        type:schema.Types.ObjectId,
+        ref:'User'
+    },
     price: Number,
     location: String,
     country: String

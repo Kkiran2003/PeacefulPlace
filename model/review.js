@@ -8,10 +8,15 @@ const reviewSchema = new schema({
            min : 1,
            max : 5
  },
+  author:{
+        type:schema.Types.ObjectId,
+        ref:'User'
+    },
  created_at : {
     type : Date,
     default : Date.now
  }
+
 });
 
 module.exports = mongoose.model("Review" , reviewSchema)
