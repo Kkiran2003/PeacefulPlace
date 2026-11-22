@@ -40,6 +40,13 @@ async function main() {
 
 main();
 
+console.log("Environment:", process.env.NODE_ENV);
+console.log("MongoDB URL available:", !!Mongo_DB);
+
+if (Mongo_DB) {
+    console.log("MongoDB hostname:", new URL(Mongo_DB).hostname);
+}
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"))
 app.use(express.urlencoded({ extended: true }));
