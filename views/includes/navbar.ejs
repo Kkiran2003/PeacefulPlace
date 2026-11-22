@@ -12,20 +12,34 @@
         <li class="nav-item">
           <a class="nav-link" href="/listing  ">All listing</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listing/create">Add new Place</a>
-        </li>
+       
       </ul>
 
+      <div class="navbar-nav ms-auto">
+       <form method="POST" class="d-flex" action="/listing/search">
+    <input
+        class="form-control me-2"
+        type="search"
+        name="q"
+        placeholder="Search listings..."
+    >
+    <button class="btn search-btn" type="submit">
+        Search
+    </button>
+</form>
+      </div>
       
  <ul class="navbar-nav ms-auto">
+   <li class="nav-item">
+          <a class="nav-link" href="/listing/create">Become a host</a>
+          </li>
   <% if(!currUser){ %>
         
     <li class="nav-item">
-      <a class="nav-link "  href="/signup">Sign up</a>
+      <a class="nav-link "  href="/signup"><b>Sign up</b></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/login ">Login</a>
+      <a class="nav-link" href="/login "><b>Login</b></a>
     </li>
  <% }else{ %>
   <li class="nav-item"><p class="nav-link"><b> @<%= currUser.username %></b></p></li>

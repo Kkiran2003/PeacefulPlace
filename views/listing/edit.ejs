@@ -2,7 +2,7 @@
 <body>
     <div class="flex offset-2 col-10 mx-auto">
   <h3 class="text-center">Edit Place</h3>
-  <form method="post" action="/listing/edit/<%= list._id %>?_method=put" class="needs-validation" novalidate>
+  <form method="post" action="/listing/edit/<%= list._id %>?_method=put" class="needs-validation" novalidate enctype="multipart/form-data">
     <div class="mb-3">
       <label for="title" class="form-label">Edit Title</label>
       <input
@@ -34,17 +34,17 @@
     </div>
 
     <div class="mb-3">
-      <label for="image" class="form-label">Add new image</label>
-      <textarea
-        type="text"
-        cols="55"
-        rows="6"
+      Original image<br/>
+      <img src=<%= originalimage %> alt="place">
+
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">upload new image</label>
+      <input
+        type="file"
         name="list[image][url]"
-        placeholder="Edit image url"
+        id="image"
         class="form-control"
-         required
-      >
-<%= list.image.url %></textarea
       >
        <div class="invalid-feedback">Please provide a image url.</div>
     </div>

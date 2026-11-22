@@ -1,30 +1,44 @@
+if(process.env.NODE_ENV != "production"){
+require('dotenv').config()
+}
+
+const dns = require("dns");
+
+// Configure DNS for MongoDB Atlas SRV lookup
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override")
 const app = express();
 const path = require("path")
 const port = 8080;
-const Mongo_DB = 'mongodb://127.0.0.1:27017/wonderlust'
+const Mongo_DB = process.env.MONGO_TOKEN
 const ejsMate = require("ejs-mate")
 const reviewRouter = require("./routes/review.js");
 const listRouter = require("./routes/listing.js")
 const userRouter = require("./routes/user.js")
 const session = require("express-session")
+const { MongoStore } = require("connect-mongo");
 const flash = require("connect-flash")
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./model/user.js");
 
 
-main().then(() => {
-    console.log("connetion successfully")
-}).catch((err) => {
-    console.log(err)
-})
-
 async function main() {
-    await mongoose.connect(Mongo_DB)
+    try {
+        await mongoose.connect(Mongo_DB);
+
+        console.log("MongoDB connection successfully");
+
+
+    } catch (err) {
+        console.log("MongoDB connection failed:", err.message);
+    }
 }
+
+main();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"))
@@ -34,7 +48,17 @@ app.use(methodOverride("_method"))
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
+const store = MongoStore.create({
+    mongoUrl: Mongo_DB,
+    touchAfter: 24 * 3600
+});
+
+store.on("error", (err) => {
+    console.log("Error in mongo session", err);
+});
+
 const sessionOption = {
+     store: store,
     secret : "mytopsecret",
     resave : false,
     saveUninitialized : true,
