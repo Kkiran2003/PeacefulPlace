@@ -159,4 +159,22 @@ transform: scale(1.1);
 
 }
 
+#map { 
+  height: 300px;
+  width: 400px;
+ }
+
+ .switch{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ }
+
+ #flexSwitchCheckDefault{
+  margin : 0px 8px;
+ }
+
+ .search-btn{
+  border-radius: 3rem !important;
+ }
 

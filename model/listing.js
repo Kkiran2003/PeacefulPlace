@@ -31,7 +31,18 @@ const listingSchema = new schema({
     },
     price: Number,
     location: String,
-    country: String
+    country: String,
+     geometry :  {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+  coordinates: {
+    type: [Number],
+    required: true
+  }}
+   
 
 })
 
