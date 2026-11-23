@@ -2,7 +2,7 @@
   const map = new mapboxgl.Map({
         accessToken: mapToken,
         container: 'map',
-        style: 'mapbox://styles/mapbox/navigation-night-v1', // style URL
+        style: 'mapbox://styles/mapbox/standard', // style URL
         zoom: 9, // initial zoom level, 0 is the world view, higher values zoom in
         center: listing.geometry.coordinates // center the map on this longitude and latitude
     });
